@@ -4,6 +4,7 @@ public class Anime {
     private Integer id;
     private String name;
     private String comment;
+    private String pic;
     private String bilibili;
     private String bt;
 
@@ -29,6 +30,14 @@ public class Anime {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 
     public String getBilibili() {

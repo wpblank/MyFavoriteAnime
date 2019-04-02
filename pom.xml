@@ -10,6 +10,7 @@
     </parent>
     <groupId>cn.lzumi</groupId>
     <artifactId>myfavoriteanime</artifactId>
+    <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>myfavoriteanime</name>
     <description>Demo project for Spring Boot</description>
@@ -54,6 +55,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <!-- MD5-->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
         </dependency>
     </dependencies>
 
