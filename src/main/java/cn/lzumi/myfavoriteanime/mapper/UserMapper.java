@@ -19,6 +19,10 @@ public interface UserMapper {
     @Select("select * from user where name=#{name}")
     String getUserByName(String name);
 
+    //查询用户是否登陆
+    @Select("select * from user where cookie=#{token}")
+    Boolean isLoginByToken(String token);
+
     @Delete("delete from user where id=#{id}")
     int deleteDeptById(Integer id);
 

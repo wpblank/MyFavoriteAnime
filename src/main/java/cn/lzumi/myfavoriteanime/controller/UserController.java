@@ -30,6 +30,13 @@ public class UserController {
             return "用户名不存在";
     }
 
+    //查看登陆状态
+    @RequestMapping(value = "/login/{token}", method = RequestMethod.GET)
+    public Boolean isLogin(@PathVariable("token") String token){
+        return userMapper.isLoginByToken(token);
+    }
+
+
     // 处理"/users/"的POST请求，用来创建User
     // 除了@ModelAttribute绑定参数之外，还可以通过@RequestParam从页面中传递参数
     @RequestMapping(value = "/", method = RequestMethod.POST)
@@ -44,13 +51,17 @@ public class UserController {
 
     @RequestMapping(value = "/login/", method = RequestMethod.POST)
     public String loginUser(@ModelAttribute User user) {
+
         if (user.getPassword().equals(userMapper.getPassword(user))) {
             String token = UUID.randomUUID().toString();
             user.setCookie(token);
             userMapper.updateCookie(user);
-            return "登陆成功:" + token;
-        } else
-            return "用户密码错误";
+            return "登陆成功" + token;
+        }
+//        else if (userMapper.getUserByName(user.getName()) == null)
+//            return "账号错误";
+        else
+            return "密码错误";
     }
 
 
