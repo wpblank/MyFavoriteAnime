@@ -32,7 +32,7 @@ public class UserController {
 
     //查看登陆状态
     @RequestMapping(value = "/login/{token}", method = RequestMethod.GET)
-    public Boolean isLogin(@PathVariable("token") String token){
+    public User isLogin(@PathVariable("token") String token){
         return userMapper.isLoginByToken(token);
     }
 
