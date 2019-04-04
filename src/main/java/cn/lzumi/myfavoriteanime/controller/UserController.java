@@ -45,8 +45,15 @@ public class UserController {
         user.setCookie(UUID.randomUUID().toString());               //生成token
         user.setCreateTime(new Date());
         //System.out.println(user.getCookie()+user.getCreateTime());
-        userMapper.insertUser(user);
-        return user.getName() + " 添加成功";
+        try{
+            int a = userMapper.insertUser(user);
+            System.out.println(a);
+            if(a>0)
+                return "创建成功";
+            else return "创建失败";
+        }catch (Exception e){
+            return "创建失败";
+        }
     }
 
     @RequestMapping(value = "/login/", method = RequestMethod.POST)

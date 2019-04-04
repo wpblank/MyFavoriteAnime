@@ -30,8 +30,9 @@ public interface UserMapper {
     @Delete("delete from user where id=#{id}")
     int deleteDeptById(Integer id);
 
+    //添加用户
     @Options(useGeneratedKeys = true,keyProperty = "id")
-    @Insert("insert into user(name,password,cookie,createTime) values(#{name},#{password},#{cookie},#{createTime})")
+    @Insert("insert into user(name,password,cookie,createTime,avatar) values(#{name},#{password},#{cookie},#{createTime},#{avatar})")
     int insertUser(User user);
 
     @Update("update user set cookie=#{cookie} where name=#{name}")
