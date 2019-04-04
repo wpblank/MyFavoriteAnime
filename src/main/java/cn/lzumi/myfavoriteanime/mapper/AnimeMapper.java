@@ -16,7 +16,7 @@ public interface AnimeMapper {
     List<Integer> getAllId();
 
     //随机获取动画信息
-    @Select("Select * From anime Order By rand() Limit 4")
+    @Select("Select * From anime Order By rand() Limit 6")
     List<Anime> getAnimeByRand();
 
     //添加动画信息
