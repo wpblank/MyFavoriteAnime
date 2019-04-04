@@ -5,10 +5,13 @@ import cn.lzumi.myfavoriteanime.mapper.AnimeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping(value = "/anime")
 public class AnimeController {
+
     @Autowired
     AnimeMapper animeMapper;
 
@@ -16,6 +19,12 @@ public class AnimeController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Anime getAnime(@PathVariable("id") Integer id) {
         return animeMapper.getAnimeById(id);
+    }
+
+    //随机获取动画信息
+    @RequestMapping(value = "/",method = RequestMethod.GET)
+    public List<Anime> getAnimeByRand(){
+        return animeMapper.getAnimeByRand();
     }
 
     //增加动画信息
