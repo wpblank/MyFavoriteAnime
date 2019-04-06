@@ -22,16 +22,22 @@ public class AnimeController {
     }
 
     //随机获取动画信息
-    @RequestMapping(value = "/",method = RequestMethod.GET)
-    public List<Anime> getAnimeByRand(){
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public List<Anime> getAnimeByRand() {
         return animeMapper.getAnimeByRand();
     }
 
     //增加动画信息
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String postAnime(@ModelAttribute Anime anime) {
-        animeMapper.insertAnime(anime);
-        return anime.getName() + "success";
+        try {
+            int a = animeMapper.insertAnime(anime);
+            if (a > 0)
+                return "添加成功";
+            return "添加失败";
+        } catch (Exception e) {
+            return "添加失败";
+        }
     }
 
     //删除动画信息
@@ -41,10 +47,10 @@ public class AnimeController {
     }
 
     //更新动画信息
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public String putUser(@PathVariable int id, @ModelAttribute Anime anime) {
         // 处理"/anime/{id}"的PUT请求，用来更新Anime信息
-        if(anime.getComment()!=null)    //修改简介
+        if (anime.getComment() != null)    //修改简介
             animeMapper.updateComment(anime);
         return "success";
     }
