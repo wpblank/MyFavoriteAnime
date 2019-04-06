@@ -2,6 +2,7 @@ package cn.lzumi.myfavoriteanime.bean;
 
 public class Anime {
     private Integer id;
+    private String userName;
     private String name;
     private String comment;
     private String pic;
@@ -14,6 +15,14 @@ public class Anime {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getName() {

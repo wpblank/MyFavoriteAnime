@@ -1,5 +1,6 @@
 package cn.lzumi.myfavoriteanime.controller;
 
+import cn.lzumi.myfavoriteanime.bean.LoginInfo;
 import cn.lzumi.myfavoriteanime.bean.User;
 import cn.lzumi.myfavoriteanime.mapper.UserMapper;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -32,7 +33,7 @@ public class UserController {
 
     //查看登陆状态
     @RequestMapping(value = "/login/{token}", method = RequestMethod.GET)
-    public User isLogin(@PathVariable("token") String token){
+    public User isLogin(@PathVariable("token") String token) {
         return userMapper.isLoginByToken(token);
     }
 
@@ -45,30 +46,37 @@ public class UserController {
         user.setCookie(UUID.randomUUID().toString());               //生成token
         user.setCreateTime(new Date());
         //System.out.println(user.getCookie()+user.getCreateTime());
-        try{
+        try {
             int a = userMapper.insertUser(user);
             System.out.println(a);
-            if(a>0)
+            if (a > 0)
                 return "创建成功";
             else return "创建失败";
-        }catch (Exception e){
+        } catch (Exception e) {
             return "创建失败";
         }
     }
 
     @RequestMapping(value = "/login/", method = RequestMethod.POST)
     public String loginUser(@ModelAttribute User user) {
-
+        LoginInfo loginInfo = new LoginInfo();
+        loginInfo.setName(user.getName());
+        loginInfo.setLoginTime(new Date());
         if (user.getPassword().equals(userMapper.getPassword(user))) {
             String token = UUID.randomUUID().toString();
             user.setCookie(token);
             userMapper.updateCookie(user);
+            loginInfo.setState("登陆成功");
+            userMapper.insertLoginInfo(loginInfo);
             return "登陆成功" + token;
         }
 //        else if (userMapper.getUserByName(user.getName()) == null)
 //            return "账号错误";
-        else
+        else {
+            loginInfo.setState("登陆失败");
+            userMapper.insertLoginInfo(loginInfo);
             return "密码错误";
+        }
     }
 
 

@@ -21,7 +21,7 @@ public interface AnimeMapper {
 
     //添加动画信息
     @Options(useGeneratedKeys = true,keyProperty = "id")
-    @Insert("insert into anime(name,comment,pic,bilibili,bt) values(#{name},#{comment},#{pic},#{bilibili},#{bt})")
+    @Insert("insert into anime(name,userName,comment,pic,bilibili,bt) values(#{name},#{userName},#{comment},#{pic},#{bilibili},#{bt})")
     int insertAnime(Anime anime);
 
     @Delete("delete from anime where id=#{id}")

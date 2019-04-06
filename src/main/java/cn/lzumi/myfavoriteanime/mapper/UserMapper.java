@@ -1,6 +1,7 @@
 package cn.lzumi.myfavoriteanime.mapper;
 
 import cn.lzumi.myfavoriteanime.bean.User;
+import cn.lzumi.myfavoriteanime.bean.LoginInfo;
 import org.apache.ibatis.annotations.*;
 
 //操作数据库的Mapper
@@ -34,6 +35,10 @@ public interface UserMapper {
     @Options(useGeneratedKeys = true,keyProperty = "id")
     @Insert("insert into user(name,password,cookie,createTime,avatar) values(#{name},#{password},#{cookie},#{createTime},#{avatar})")
     int insertUser(User user);
+
+    //保存登录信息
+    @Insert("insert into logininfo(name,loginTime,state) values(#{name},#{loginTime},#{state})")
+    void insertLoginInfo(LoginInfo loginInfo);
 
     @Update("update user set cookie=#{cookie} where name=#{name}")
     int updateCookie(User user);
